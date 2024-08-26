@@ -49,7 +49,7 @@ const ListInfoMap = ({ locationData }) => {
   useEffect(() => {
     const fetchDate = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/user-data");
+        const response = await axios.get("http://localhost:8082/user-data");
         setDateString(response.data.created_at); // Ensure correct path
       } catch (error) {
         console.error("Error fetching the date:", error);

@@ -34,7 +34,7 @@ export default function HorizontalBars() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/total-distances");
+        const response = await axios.get("http://localhost:8082/total-distances");
         const data = response.data;
 
         if (data.length > 0) {

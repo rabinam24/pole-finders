@@ -36,7 +36,7 @@ const MapWithWebSocket = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/user-data");
+        const response = await axios.get("http://localhost:8082/user-data");
         
         // Check if response data is in JSON format
         if (response.headers['content-type'].includes('application/json')) {

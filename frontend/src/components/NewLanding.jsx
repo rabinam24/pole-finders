@@ -90,9 +90,10 @@ const gridVariants = {
   },
 };
 
-const CLIENT_ID =
-  "607168653915-f5sac4tb4mvuslkj2l0cit912nupdkr3.apps.googleusercontent.com";
-const REDIRECT_URI = "https://5e28-202-79-62-4.ngrok-free.app";
+const CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID || "pole-finder";
+const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI || "http://pole-finder.wlink.com.np:5173";
+
+
 
 
 function NewLanding() {
@@ -144,7 +145,7 @@ function NewLanding() {
 
   const fetchUsernameFromBackend = async (code) => {
     try {
-      const response = await axios.get("http://localhost:8080/calling", {
+      const response = await axios.get("http://localhost:8082/calling", {
         params: { code },
       });
 
@@ -177,7 +178,7 @@ function NewLanding() {
       const fetchUserInfo = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:8080/api/userinfo"
+            "http://localhost:8082/api/userinfo"
           );
           const userInfo = response.data;
           const userName = userInfo.name || userInfo.username || userInfo.email;
@@ -197,7 +198,7 @@ function NewLanding() {
     if (isAuthenticated) {
       const UserDetailsInfo = async () => {
         try {
-          const reponse = await axios.post("http://localhost:8080/save-user");
+          const reponse = await axios.post("http://localhost:8082/save-user");
           console.log(reponse);
         } catch (error) {
           console.error("Error saving the userdetailsinfo:", error);
@@ -212,7 +213,7 @@ function NewLanding() {
       try {
         console.log("Fetching trip state with username:", username);
         const response = await axios.post(
-          "http://localhost:8080/get_trip_state",
+          "http://localhost:8082/get_trip_state",
           { username }
         );
         if (response.status === 200) {
@@ -263,7 +264,7 @@ function NewLanding() {
 
       console.log("Attempting to start trip with username:", userName);
 
-      const response = await axios.post("http://localhost:8080/start_trip", {
+      const response = await axios.post("http://localhost:8082/start_trip", {
         username: userName,
       });
 
@@ -306,7 +307,7 @@ function NewLanding() {
 
 
       const response = await axios.post(
-        "http://localhost:8080/end_trip",
+        "http://localhost:8082/end_trip",
         { username: userName },
         { headers: { "Content-Type": "application/json" } }
       );

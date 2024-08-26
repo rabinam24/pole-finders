@@ -11,8 +11,8 @@ CREATE TABLE userform (
     selectisp VARCHAR(255),
     poleimage VARCHAR(255),
     multipleimages VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    user_id INTEGER REFERENCES user_info(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INTEGER REFERENCES user_info(id)
 );
 
 CREATE TABLE public.trip (
