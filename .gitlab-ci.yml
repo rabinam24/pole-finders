@@ -1,0 +1,49 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  #DOCKER_REGISTRY: example:5000/
+  DOCKER_IMAGE_FRONTEND: 10.10.250.87:5000/pole-finder-frontend:latest
+  DOCKER_IMAGE_USERFORM: 10.10.250.87:5000/pole-finder-userform:latest
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - docker info
+
+build_frontend:
+  stage: build
+  tags:
+    - shell
+  script:
+    - docker rmi -f $DOCKER_IMAGE_FRONTEND
+    - docker build --no_cache -t $DOCKER_IMAGE_FRONTEND ./frontend/
+    - docker push $DOCKER_IMAGE_FRONTEND
+  
+build_userform:
+  stage: build
+  tags:
+    - shell
+  script:
+    - docker rmi -f $DOCKER_IMAGE_USERFORM
+    - docker build --no_cache -t $DOCKER_IMAGE_USERFORM ./userform/
+    - docker push $DOCKER_IMAGE_USERFORM
+
+deploy_pole-finder:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - docker -H 10.10.250.87:2376 rmi -f $DOCKER_IMAGE_FRONTEND $DOCKER_IMAGE_USERFORM
+    - docker -H 10.10.250.87:2376 pull $DOCKER_IMAGE_FRONTEND
+    - docker -H 10.10.250.87:2376 pull $DOCKER_IMAGE_USERFORM
+    - docker -H 10.10.250.87:2376 compose down
+    - docker -H 10.10.250.87:2376 compose up -d
+    - docker -H 10.10.250.87:2376 ps | grep pole
+
+  only:
+    refs:
+      - master
+  dependencies:
+    - build_frontend
+    - build_userform
