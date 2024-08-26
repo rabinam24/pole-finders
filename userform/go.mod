@@ -1,23 +1,25 @@
 module github/rabinam24/userform
 
-go 1.22.3
+go 1.23
+
+toolchain go1.23.0
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/gorilla/sessions v1.3.0
+	github.com/gorilla/sessions v1.4.0
+	github.com/lib/pq v1.10.9
 	github.com/minio/minio-go/v7 v7.0.71
+	github.com/rs/cors v1.11.0
 	golang.org/x/crypto v0.25.0
 	golang.org/x/oauth2 v0.22.0
 )
 
 require (
-	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/lib/pq v1.10.9 // indirect
-	github.com/rs/cors v1.11.0 // indirect
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
+	github.com/gorilla/securecookie v1.1.2 // indirect
 )
 
 require (
-	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
@@ -31,7 +33,6 @@ require (
 	github.com/go-playground/validator/v10 v10.20.0 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.9 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
